@@ -1,2 +1,9 @@
-package co.za.bbd.ars.service;public interface IService {
+package co.za.bbd.ars.service;
+
+import java.util.Optional;
+
+public interface IService<T, ID> {
+    T save(T t);
+    Optional<T> read(ID id);
+    void delete(T t);
 }
