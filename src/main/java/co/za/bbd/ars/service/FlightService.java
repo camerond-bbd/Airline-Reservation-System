@@ -22,4 +22,6 @@ public interface FlightService extends IService<Flight, Integer> {
     List<Flight> getFlightsByFilters(FlightFilters filters);
 
     List<Ticket> getTicketsByFilters(Integer flightId, FlightFilters filters);
+
+    Flight updateFlight(Integer flightId, Flight flight);
 }

@@ -3,6 +3,7 @@ package co.za.bbd.ars.controller;
 import co.za.bbd.ars.dtos.FlightData;
 import co.za.bbd.ars.dtos.FlightDataResponse;
 import co.za.bbd.ars.dtos.FlightFilters;
+import co.za.bbd.ars.model.Flight;
 import co.za.bbd.ars.service.impl.FlightServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("api/v1/airline-system/flights")
+@RequestMapping("api/v1/airline-system/flight")
 public class FlightController {
 
     private final FlightServiceImpl flightService;
@@ -25,8 +26,7 @@ public class FlightController {
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<FlightDataResponse> createNewFlightPlan(
-            @RequestBody FlightData flightData)
+    public ResponseEntity<FlightDataResponse> createNewFlightPlan(@RequestBody FlightData flightData)
     {
         FlightDataResponse newFlightPlan = flightService.createNewFlightPlan(flightData);
         return new ResponseEntity<>(newFlightPlan, HttpStatus.CREATED);
@@ -43,5 +43,19 @@ public class FlightController {
         FlightFilters filters= new FlightFilters(airlineId, departureAirportId, arrivalAirportId, minPrice, maxPrice);
         List<FlightDataResponse> flightDataResponses = flightService.getFlights(filters);
         return new ResponseEntity<>(flightDataResponses, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/{flightId}/update", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity updateFlight(
+            @PathVariable Integer flightId,
+            @RequestBody Flight flight
+    ) {
+        try {
+            Flight updatedFlight = flightService.updateFlight(flightId, flight);
+            return new ResponseEntity<>(updatedFlight, HttpStatus.OK);
+
+        } catch (IllegalArgumentException exception) {
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }

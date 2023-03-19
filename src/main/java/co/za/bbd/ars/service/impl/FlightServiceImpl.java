@@ -116,7 +116,7 @@ public class FlightServiceImpl implements FlightService {
         } else if (filters.getAirlineId() != null && filters.getArrivalAirportId() == null && filters.getDepartureAirportId() != null) {
             return flightRepository.findAllByAirlineIdAndDepartureAirportId(filters.getAirlineId(), filters.getDepartureAirportId());
         }
-        return flightRepository.findAll();
+        return this.findAll();
     }
 
     @Override
@@ -130,4 +130,13 @@ public class FlightServiceImpl implements FlightService {
         }
         return ticketService.findAllByFlightId(flightId);
     }
+
+    @Override
+    public Flight updateFlight(Integer flightId, Flight flight) {
+        if(flightId != flight.getFlightId()) {
+            throw new IllegalArgumentException("Flight Id does not match param id");
+        }
+        return this.save(flight);
+    }
+
 }
