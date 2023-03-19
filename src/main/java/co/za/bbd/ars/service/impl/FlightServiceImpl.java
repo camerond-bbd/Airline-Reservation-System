@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 
 public class FlightServiceImpl implements FlightService {
 
-    private FlightRepository flightRepository;
-    private TicketService ticketService;
+    private final FlightRepository flightRepository;
+    private final TicketService ticketService;
 
     @Autowired
     public FlightServiceImpl(
