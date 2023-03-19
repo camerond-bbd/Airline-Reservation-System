@@ -37,8 +37,8 @@ public class FlightController {
             @RequestParam(value = "airlineId") Integer airlineId,
             @RequestParam(value = "departureAirportId") Integer departureAirportId,
             @RequestParam(value = "arrivalAirportId") Integer arrivalAirportId,
-            @RequestParam(value = "minPrice") double minPrice,
-            @RequestParam(value = "maxPrice") double maxPrice)
+            @RequestParam(value = "minPrice") Double minPrice,
+            @RequestParam(value = "maxPrice") Double maxPrice)
     {
         FlightFilters filters= new FlightFilters(airlineId, departureAirportId, arrivalAirportId, minPrice, maxPrice);
         List<FlightDataResponse> flightDataResponses = flightService.getFlights(filters);

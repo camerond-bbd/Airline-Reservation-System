@@ -91,20 +91,43 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public List<FlightDataResponse> getFlights(FlightFilters filters) {
 
-        return flightRepository.findAll().stream()
-                .filter(flight -> Objects.equals(filters.getAirlineId(), flight.getAirlineId())
-                        && Objects.equals(filters.getArrivalAirportId(), flight.getArrivalAirportId())
-                        && Objects.equals(filters.getDepartureAirportId(), flight.getDepartureAirportId()))
+        return this.getFlightsByFilters(filters).stream()
                 .map(filteredFlight -> {
-                    List<Ticket> tickets = ticketService.findAllByFlightId(filteredFlight.getFlightId())
-                            .stream().filter(ticket -> ticket.getPrice() >= filters.getMinPrice() && ticket.getPrice() <= filters.getMaxPrice())
-                            .collect(Collectors.toList());
+                    List<Ticket> tickets = this.getTicketsByFilters(filteredFlight.getFlightId(), filters);
                     return new FlightDataResponse(filteredFlight, tickets);
                 })
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Flight> getFlightsByFilters(FlightFilters filters) {
+        if (filters.getAirlineId() != null && filters.getArrivalAirportId() != null && filters.getDepartureAirportId() != null) {
+            return flightRepository.findAllByAirlineIdAndDepartureAirportIdAndArrivalAirportId(filters.getAirlineId(), filters.getDepartureAirportId(), filters.getArrivalAirportId());
+        } else if (filters.getAirlineId() != null && filters.getArrivalAirportId() == null && filters.getDepartureAirportId() == null) {
+            return flightRepository.findAllByAirlineId(filters.getAirlineId());
+        } else if (filters.getAirlineId() == null && filters.getArrivalAirportId() != null && filters.getDepartureAirportId() != null) {
+            return flightRepository.findAllByDepartureAirportIdAndArrivalAirportId(filters.getDepartureAirportId(), filters.getArrivalAirportId());
+        } else if (filters.getAirlineId() == null && filters.getArrivalAirportId() == null && filters.getDepartureAirportId() != null) {
+            return flightRepository.findAllByDepartureAirportId(filters.getDepartureAirportId());
+        } else if (filters.getAirlineId() == null && filters.getArrivalAirportId() != null && filters.getDepartureAirportId() == null) {
+            return flightRepository.findAllByArrivalAirportId(filters.getArrivalAirportId());
+        } else if (filters.getAirlineId() != null && filters.getArrivalAirportId() != null && filters.getDepartureAirportId() == null) {
+            return  flightRepository.findAllByAirlineIdAndArrivalAirportId(filters.getAirlineId(), filters.getArrivalAirportId());
+        } else if (filters.getAirlineId() != null && filters.getArrivalAirportId() == null && filters.getDepartureAirportId() != null) {
+            return flightRepository.findAllByAirlineIdAndDepartureAirportId(filters.getAirlineId(), filters.getDepartureAirportId());
+        }
+        return flightRepository.findAll();
+    }
 
-
-
+    @Override
+    public List<Ticket> getTicketsByFilters(Integer flightId, FlightFilters filters){
+        if(filters.getMinPrice() != null && filters.getMaxPrice() != null){
+            return ticketService.findAllByFlightIdAndPriceLessThenEqualAndPriceGreaterThenEqual(flightId, filters.getMaxPrice(), filters.getMinPrice());
+        } else if (filters.getMinPrice() == null && filters.getMaxPrice() != null) {
+            return ticketService.findAllByFlightIdAndPriceLessThenEqual(flightId, filters.getMaxPrice());
+        } else if (filters.getMinPrice() != null && filters.getMaxPrice() == null) {
+            return  ticketService.findAllByFlightIdAndPriceGreaterThenEqual(flightId, filters.getMinPrice());
+        }
+        return ticketService.findAllByFlightId(flightId);
+    }
 }

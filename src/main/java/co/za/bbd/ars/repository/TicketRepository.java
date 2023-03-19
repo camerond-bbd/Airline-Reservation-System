@@ -10,4 +10,7 @@ import java.util.Optional;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Integer> {
     List<Ticket> findAllByFlightId(Integer id);
+    List<Ticket> findAllByFlightIdAndPriceGreaterThenEqual(Integer flightId, double minPrice);
+    List<Ticket> findAllByFlightIdAndPriceLessThenEqual(Integer flightId, double maxPrice);
+    List<Ticket> findAllByFlightIdAndPriceLessThenEqualAndPriceGreaterThenEqual(Integer flightId, double maxPrice, double minPrice);
 }
