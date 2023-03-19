@@ -109,11 +109,11 @@ public class FlightServiceImpl implements FlightService {
             return flightRepository.findAllByDepartureAirportIdAndArrivalAirportId(filters.getDepartureAirportId(), filters.getArrivalAirportId());
         } else if (filters.getAirlineId() == null && filters.getArrivalAirportId() == null && filters.getDepartureAirportId() != null) {
             return flightRepository.findAllByDepartureAirportId(filters.getDepartureAirportId());
-        } else if (filters.getAirlineId() == null && filters.getArrivalAirportId() != null && filters.getDepartureAirportId() == null) {
+        } else if (filters.getAirlineId() == null && filters.getArrivalAirportId() != null) {
             return flightRepository.findAllByArrivalAirportId(filters.getArrivalAirportId());
-        } else if (filters.getAirlineId() != null && filters.getArrivalAirportId() != null && filters.getDepartureAirportId() == null) {
+        } else if (filters.getAirlineId() != null && filters.getArrivalAirportId() != null) {
             return  flightRepository.findAllByAirlineIdAndArrivalAirportId(filters.getAirlineId(), filters.getArrivalAirportId());
-        } else if (filters.getAirlineId() != null && filters.getArrivalAirportId() == null && filters.getDepartureAirportId() != null) {
+        } else if (filters.getAirlineId() != null) {
             return flightRepository.findAllByAirlineIdAndDepartureAirportId(filters.getAirlineId(), filters.getDepartureAirportId());
         }
         return this.findAll();
@@ -125,7 +125,7 @@ public class FlightServiceImpl implements FlightService {
             return ticketService.findAllByFlightIdAndPriceLessThenEqualAndPriceGreaterThenEqual(flightId, filters.getMaxPrice(), filters.getMinPrice());
         } else if (filters.getMinPrice() == null && filters.getMaxPrice() != null) {
             return ticketService.findAllByFlightIdAndPriceLessThenEqual(flightId, filters.getMaxPrice());
-        } else if (filters.getMinPrice() != null && filters.getMaxPrice() == null) {
+        } else if (filters.getMinPrice() != null) {
             return  ticketService.findAllByFlightIdAndPriceGreaterThenEqual(flightId, filters.getMinPrice());
         }
         return ticketService.findAllByFlightId(flightId);
@@ -133,7 +133,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public Flight updateFlight(Integer flightId, Flight flight) {
-        if(flightId != flight.getFlightId()) {
+        if(!Objects.equals(flightId, flight.getFlightId())) {
             throw new IllegalArgumentException("Flight Id does not match param id");
         }
         return this.save(flight);
