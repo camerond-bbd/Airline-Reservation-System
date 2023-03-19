@@ -96,13 +96,15 @@ public class FlightServiceImpl implements FlightService {
                         && Objects.equals(filters.getArrivalAirportId(), flight.getArrivalAirportId())
                         && Objects.equals(filters.getDepartureAirportId(), flight.getDepartureAirportId()))
                 .map(filteredFlight -> {
-                    List<Ticket> tickets = ticketService.findByFlightId(filteredFlight.getFlightId())
+                    List<Ticket> tickets = ticketService.findAllByFlightId(filteredFlight.getFlightId())
                             .stream().filter(ticket -> ticket.getPrice() >= filters.getMinPrice() && ticket.getPrice() <= filters.getMaxPrice())
                             .collect(Collectors.toList());
                     return new FlightDataResponse(filteredFlight, tickets);
                 })
                 .collect(Collectors.toList());
     }
+
+
 
 
 }

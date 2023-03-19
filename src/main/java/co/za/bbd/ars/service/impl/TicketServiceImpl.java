@@ -44,7 +44,7 @@ public class TicketServiceImpl implements TicketService {
         return this.repository.findAll();
     }
 
-    public List<Ticket> findByFlightId(Integer id) {
-        return repository.findByFlightId(id);
+    public List<Ticket> findAllByFlightId(Integer id) {
+        return repository.findAllByFlightId(id);
     }
 }

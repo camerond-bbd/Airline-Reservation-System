@@ -34,11 +34,11 @@ public class FlightController {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<FlightDataResponse>> getAllFlights(
-            @PathVariable(value = "airlineId") Integer airlineId,
-            @PathVariable(value = "departureAirportId") Integer departureAirportId,
-            @PathVariable(value = "arrivalAirportId") Integer arrivalAirportId,
-            @PathVariable(value = "minPrice") double minPrice,
-            @PathVariable(value = "maxPrice") double maxPrice)
+            @RequestParam(value = "airlineId") Integer airlineId,
+            @RequestParam(value = "departureAirportId") Integer departureAirportId,
+            @RequestParam(value = "arrivalAirportId") Integer arrivalAirportId,
+            @RequestParam(value = "minPrice") double minPrice,
+            @RequestParam(value = "maxPrice") double maxPrice)
     {
         FlightFilters filters= new FlightFilters(airlineId, departureAirportId, arrivalAirportId, minPrice, maxPrice);
         List<FlightDataResponse> flightDataResponses = flightService.getFlights(filters);

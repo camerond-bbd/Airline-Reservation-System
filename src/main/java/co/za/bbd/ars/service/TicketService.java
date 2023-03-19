@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface TicketService extends IService<Ticket, Integer>{
     void deleteById(Integer id);
     List<Ticket> findAll();
-    List<Ticket> findByFlightId(Integer id);
+    List<Ticket> findAllByFlightId(Integer id);
 }
