@@ -26,7 +26,6 @@ public class PassengerController {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<PassengerDataResponse>> getAllPassengers(
-            @RequestParam(value = "passengerId") Integer passengerId,
             @RequestParam(value = "firstName") String firstName,
             @RequestParam(value = "lastName") String lastName,
             @RequestParam(value = "email") String email,

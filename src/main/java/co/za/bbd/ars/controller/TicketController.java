@@ -1,10 +1,7 @@
 package co.za.bbd.ars.controller;
 
-import co.za.bbd.ars.factory.DummyFactory;
 import co.za.bbd.ars.factory.TicketFactory;
-import co.za.bbd.ars.model.DummyDomain;
 import co.za.bbd.ars.model.Ticket;
-import co.za.bbd.ars.service.impl.DummyServiceImpl;
 import co.za.bbd.ars.service.impl.TicketServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
