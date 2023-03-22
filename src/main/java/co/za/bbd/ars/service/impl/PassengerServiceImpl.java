@@ -4,22 +4,21 @@ import co.za.bbd.ars.model.Passenger;
 import co.za.bbd.ars.repository.PassengerRepository;
 import co.za.bbd.ars.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.Optional;
 
+@Service
 public class PassengerServiceImpl implements PassengerService {
 
     private final PassengerRepository passengerRepository;
-    private final PassengerService passengerService;
 
     @Autowired
     public PassengerServiceImpl(
-            PassengerRepository passengerRepository,
-            PassengerService passengerService
+            PassengerRepository passengerRepository
     ) {
         this.passengerRepository = passengerRepository;
-        this.passengerService = passengerService;
     }
 
     @Override

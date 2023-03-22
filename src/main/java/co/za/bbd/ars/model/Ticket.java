@@ -1,13 +1,15 @@
 package co.za.bbd.ars.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+
 import java.util.Objects;
 
 
 //TODO: Add the relationship annotation once Models are created
 @Entity
+@Data
 public class Ticket {
     @NotNull
     @Id

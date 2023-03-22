@@ -20,7 +20,7 @@ public class FlightData {
 
     public Flight getFlightObject() {
         return new Flight(
-                null,
+                0,
                 this.arlineId,
                 this.departureAirportId,
                 this.arrivalAirportId,

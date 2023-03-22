@@ -1,29 +1,31 @@
 package co.za.bbd.ars.model;
 
-import javax.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Getter @Setter
+@Data
+@AllArgsConstructor
+
 public class Flight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "flightId", nullable = false)
-    private Integer flightId;
+    private int flightId;
 
     @Column(name = "airlineId", nullable = false)
-    private Integer airlineId;
+    private int airlineId;
 
     @Column(name = "departureAirportId", nullable = false)
-    private Integer departureAirportId;
+    private int departureAirportId;
 
     @Column(name = "arrivalAirportId", nullable = false)
-    private Integer arrivalAirportId;
+    private int arrivalAirportId;
 
     @Column(name = "departureDate", nullable = false)
     private Date departureDate;
@@ -32,17 +34,7 @@ public class Flight {
     private Date arrivalDate;
 
     @Column(name = "availableSeats", nullable = false)
-    private Integer availableSeats;
-
-    public Flight(Integer flightId, Integer airlineId, Integer departureAirportId, Integer arrivalAirportId, Date departureDate, Date arrivalDate, Integer availableSeats) {
-        this.flightId = flightId;
-        this.airlineId = airlineId;
-        this.departureAirportId = departureAirportId;
-        this.arrivalAirportId = arrivalAirportId;
-        this.departureDate = departureDate;
-        this.arrivalDate = arrivalDate;
-        this.availableSeats = availableSeats;
-    }
+    private int availableSeats;
 
     @Override
     public boolean equals(Object o) {

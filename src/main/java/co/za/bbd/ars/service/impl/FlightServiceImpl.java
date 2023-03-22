@@ -10,6 +10,7 @@ import co.za.bbd.ars.repository.FlightRepository;
 import co.za.bbd.ars.service.FlightService;
 import co.za.bbd.ars.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class FlightServiceImpl implements FlightService {
 
     private final FlightRepository flightRepository;
@@ -121,13 +123,13 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public List<Ticket> getTicketsByFilters(Integer flightId, FlightFilters filters){
-        if(filters.getMinPrice() != null && filters.getMaxPrice() != null){
-            return ticketService.findAllByFlightIdAndPriceLessThenEqualAndPriceGreaterThenEqual(flightId, filters.getMaxPrice(), filters.getMinPrice());
-        } else if (filters.getMinPrice() == null && filters.getMaxPrice() != null) {
-            return ticketService.findAllByFlightIdAndPriceLessThenEqual(flightId, filters.getMaxPrice());
-        } else if (filters.getMinPrice() != null) {
-            return  ticketService.findAllByFlightIdAndPriceGreaterThenEqual(flightId, filters.getMinPrice());
-        }
+//        if(filters.getMinPrice() != null && filters.getMaxPrice() != null){
+//            return ticketService.findAllByFlightIdAndPriceLessThenEqualAndPriceGreaterThenEqual(flightId, filters.getMaxPrice(), filters.getMinPrice());
+//        } else if (filters.getMinPrice() == null && filters.getMaxPrice() != null) {
+//            return ticketService.findAllByFlightIdAndPriceLessThenEqual(flightId, filters.getMaxPrice());
+//        } else if (filters.getMinPrice() != null) {
+//            return  ticketService.findAllByFlightIdAndPriceGreaterThenEqual(flightId, filters.getMinPrice());
+//        }
         return ticketService.findAllByFlightId(flightId);
     }
 
