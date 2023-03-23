@@ -5,8 +5,10 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -21,8 +23,8 @@ import lombok.Setter;
 @Setter
 public class Reservation {
 
-	@Id
-    @GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "reservationId", nullable = false)
 	private int reservationId;
 
 	@ManyToOne
@@ -41,6 +43,7 @@ public class Reservation {
 	private Passenger passenger;
 	
 	@NotNull
+	@Column(name = "reservationDate", nullable = false)
 	private Date reservationDate;
 	
 	
@@ -87,6 +90,5 @@ public class Reservation {
 				+ ", passenger=" + passenger + ", reservationDate=" + reservationDate + "]";
 	}
 
-	
-	
+
 }
