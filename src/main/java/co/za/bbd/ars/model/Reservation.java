@@ -28,17 +28,17 @@ public class Reservation {
 	private int reservationId;
 
 	@ManyToOne
-    @JoinColumn(name="flight_id")
+        @JoinColumn(name="flight_id")
 	@Autowired
 	private Flight flight;
 	
 	@ManyToOne
-    @JoinColumn(name="ticket_id")
+        @JoinColumn(name="ticket_id")
 	@Autowired
 	private Ticket ticket;
 	
 	@ManyToOne
-    @JoinColumn(name="passenger_id")
+        @JoinColumn(name="passenger_id")
 	@Autowired
 	private Passenger passenger;
 	
