@@ -1,11 +1,8 @@
 package co.za.bbd.ars.controller;
 
 import co.za.bbd.ars.factory.PaymentFactory;
-import co.za.bbd.ars.factory.TicketFactory;
 import co.za.bbd.ars.model.Payment;
-import co.za.bbd.ars.model.Ticket;
 import co.za.bbd.ars.service.impl.PaymentServiceImpl;
-import co.za.bbd.ars.service.impl.TicketServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +24,7 @@ public class PaymentController {
 
     @PostMapping("save")
     public ResponseEntity<Payment> save(@Valid @RequestBody Payment payment) {
-        Payment savePayment = PaymentFactory.createPayment(payment.getPaymentId(), payment.getReservationId(), payment.getPaymentMethodId(), payment.getAmountPaid(), payment.getPaymentDate());
+        Payment savePayment = PaymentFactory.createPayment(payment.getPaymentId(), payment.getReservation(), payment.getPaymentMethod(), payment.getAmountPaid(), payment.getPaymentDate());
         return ResponseEntity.ok(paymentService.save(savePayment));
     }
 

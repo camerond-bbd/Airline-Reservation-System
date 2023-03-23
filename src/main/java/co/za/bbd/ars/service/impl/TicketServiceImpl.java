@@ -2,7 +2,6 @@ package co.za.bbd.ars.service.impl;
 
 import co.za.bbd.ars.model.Ticket;
 import co.za.bbd.ars.repository.TicketRepository;
-import co.za.bbd.ars.service.IService;
 import co.za.bbd.ars.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +43,7 @@ public class TicketServiceImpl implements TicketService {
         return this.repository.findAll();
     }
 
-    public List<Ticket> findAllByFlightId(Integer id) {
-        return repository.findAllByFlightId(id);
+    public List<Ticket> findAllTicketsByFlightId(Integer id) {
+        return this.repository.findAllTicketsByFlightId(id);
     }
 }

@@ -3,11 +3,13 @@ package co.za.bbd.ars.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serializable;
 import java.util.Objects;
-
-import static jakarta.persistence.GenerationType.IDENTITY;
 
 
 //TODO: Add the relationship annotation once Models are created
@@ -16,19 +18,21 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 @Data
 @AllArgsConstructor
-public class Ticket {
+@NoArgsConstructor
+@Builder
+public class Ticket implements Serializable {
     @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ticketId;
-//    @ManyToOne
-//    @JoinColumn(name = "FK_flightId", referencedColumnName = "flightId")
+    @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="flight_id")
     @NotNull
-    private int flightId;
-//    @OneToOne
-//    @JoinColumn(name = "FK_statusId", referencedColumnName = "statusId")
+    private Flight flight;
+    @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="status_id")
     @NotNull
-    private int statusId;
+    private TicketStatuses status;
     @NotNull
     private String ticketDescription;
     @NotNull
@@ -36,19 +40,16 @@ public class Ticket {
     @NotNull
     private int seatNumber;
 
-    public Ticket() {
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return ticketId == ticket.ticketId && flightId == ticket.flightId && statusId == ticket.statusId && price == ticket.price && seatNumber == ticket.seatNumber && Objects.equals(ticketDescription, ticket.ticketDescription);
+        return ticketId == ticket.ticketId && Double.compare(ticket.price, price) == 0 && seatNumber == ticket.seatNumber && flight.equals(ticket.flight) && status.equals(ticket.status) && ticketDescription.equals(ticket.ticketDescription);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ticketId, flightId, statusId, ticketDescription, price, seatNumber);
+        return Objects.hash(ticketId, flight, status, ticketDescription, price, seatNumber);
     }
 }

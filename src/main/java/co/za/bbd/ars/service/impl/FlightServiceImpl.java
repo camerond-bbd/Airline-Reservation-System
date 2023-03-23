@@ -69,7 +69,7 @@ public class FlightServiceImpl implements FlightService {
         Flight savedFlight = this.save(newFlight);
         List<Ticket> newTickets = flightData.getTickets()
                 .stream().map(flightTicketData ->
-                        this.createTickets(flightTicketData, savedFlight.getFlightId()))
+                        this.createTickets(flightTicketData, savedFlight))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 
@@ -80,13 +80,13 @@ public class FlightServiceImpl implements FlightService {
     }
 
 
-    private List<Ticket> createTickets(FlightTicketData flightTicketData, Integer flightId){
+    private List<Ticket> createTickets(FlightTicketData flightTicketData, Flight flight){
         return flightTicketData.getSeats().stream().map(seatNumber -> {
             TicketStatuses status = ticketStatuses.findStatusByStatusName(flightTicketData.getStatus());
             Ticket newTicket = new Ticket(
                     0,
-                    flightId,
-                    status.getStatusId(),
+                    flight,
+                    status,
                     flightTicketData.getTicketDescription(),
                     flightTicketData.getPrice(),
                     seatNumber
@@ -101,7 +101,7 @@ public class FlightServiceImpl implements FlightService {
 
         return this.getFlightsByFilters(filters).stream()
                 .map(filteredFlight -> {
-                    List<Ticket> tickets = ticketService.findAllByFlightId(filteredFlight.getFlightId());
+                    List<Ticket> tickets = ticketService.findAllTicketsByFlightId(filteredFlight.getFlightId());
                     return new FlightDataResponse(filteredFlight, tickets);
                 })
                 .collect(Collectors.toList());

@@ -1,11 +1,14 @@
 package co.za.bbd.ars.service.impl;
 
 import co.za.bbd.ars.factory.TicketFactory;
+import co.za.bbd.ars.model.Flight;
 import co.za.bbd.ars.model.Ticket;
+import co.za.bbd.ars.model.TicketStatuses;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,13 +18,19 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TicketServiceImplTest {
     private Ticket ticket;
+    private Flight flight;
+    private TicketStatuses status;
     @Autowired
     private TicketServiceImpl service;
+    @Autowired
+    private FlightServiceImpl flightService;
+    @Autowired
+    private TicketStatusesImpl statusService;
 
     @BeforeEach
     void setUp() {
-        this.ticket = TicketFactory.createTicket(1, 1, 1, "test-description", 200.00, 1);
-        this.service.save(this.ticket);
+        mockValues();
+        this.ticket = TicketFactory.createTicket(1, flight, status, "test-description", 200.00, 1);
     }
     @Test
     @Order(1)
@@ -54,5 +63,12 @@ class TicketServiceImplTest {
         assertAll(
                 () -> assertEquals(0, tickets.size())
         );
+    }
+
+    private void mockValues() {
+        this.flight = new Flight(1, 1, 1, 1, new Date("12 March 2023"), new Date("12 March 2023"), 10);
+        this.flightService.save(flight);
+        this.status = new TicketStatuses(1, "PENDING");
+        this.statusService.save(status);
     }
 }

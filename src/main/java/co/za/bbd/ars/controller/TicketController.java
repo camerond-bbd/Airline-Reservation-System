@@ -1,5 +1,6 @@
 package co.za.bbd.ars.controller;
 
+import co.za.bbd.ars.api.TicketAPI;
 import co.za.bbd.ars.factory.TicketFactory;
 import co.za.bbd.ars.model.Ticket;
 import co.za.bbd.ars.service.impl.TicketServiceImpl;
@@ -16,15 +17,18 @@ import java.util.List;
 @RequestMapping("api/v1/airline-system/ticket")
 public class TicketController {
     private final TicketServiceImpl ticketService;
+    private TicketAPI api;
 
     @Autowired
-    public TicketController(TicketServiceImpl service) {
-        this.ticketService = service;
+    public TicketController(TicketServiceImpl ticketService, TicketAPI api) {
+        this.ticketService = ticketService;
+        this.api = api;
     }
+
 
     @PostMapping("save")
     public ResponseEntity<Ticket> save(@Valid @RequestBody Ticket ticket) {
-        Ticket saveTicket = TicketFactory.createTicket(ticket.getTicketId(), ticket.getFlightId(), ticket.getStatusId(), ticket.getTicketDescription(), ticket.getPrice(), ticket.getSeatNumber());
+        Ticket saveTicket = TicketFactory.createTicket(ticket.getTicketId(), ticket.getFlight(), ticket.getStatus(), ticket.getTicketDescription(), ticket.getPrice(), ticket.getSeatNumber());
         return ResponseEntity.ok(ticketService.save(saveTicket));
     }
 
@@ -49,6 +53,12 @@ public class TicketController {
     @GetMapping("all")
     public ResponseEntity<List<Ticket>> findAll() {
         List<Ticket> ticketList = this.ticketService.findAll();
+        return ResponseEntity.ok(ticketList);
+    }
+
+    @GetMapping("all/{id}")
+    public ResponseEntity<List<Ticket>> findAllTicketsByFlightId(@PathVariable Integer id) {
+        List<Ticket> ticketList = this.ticketService.findAllTicketsByFlightId(id);
         return ResponseEntity.ok(ticketList);
     }
 }
