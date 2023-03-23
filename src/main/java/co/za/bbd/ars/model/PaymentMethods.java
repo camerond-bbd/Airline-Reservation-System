@@ -2,7 +2,7 @@ package co.za.bbd.ars.model;
 
 import lombok.*;
 import lombok.Data;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
