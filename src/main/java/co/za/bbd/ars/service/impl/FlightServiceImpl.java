@@ -128,18 +128,6 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public List<Ticket> getTicketsByFilters(Integer flightId, FlightFilters filters){
-//        if(filters.getMinPrice() != null && filters.getMaxPrice() != null){
-//            return ticketService.findAllByFlightIdAndPriceLessThenEqualAndPriceGreaterThenEqual(flightId, filters.getMaxPrice(), filters.getMinPrice());
-//        } else if (filters.getMinPrice() == null && filters.getMaxPrice() != null) {
-//            return ticketService.findAllByFlightIdAndPriceLessThenEqual(flightId, filters.getMaxPrice());
-//        } else if (filters.getMinPrice() != null) {
-//            return  ticketService.findAllByFlightIdAndPriceGreaterThenEqual(flightId, filters.getMinPrice());
-//        }
-        return ticketService.findAllByFlightId(flightId);
-    }
-
-    @Override
     public Flight updateFlight(Integer flightId, Flight flight) {
         if(!Objects.equals(flightId, flight.getFlightId())) {
             throw new IllegalArgumentException("Flight Id does not match param id");
