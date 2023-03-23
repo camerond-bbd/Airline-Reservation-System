@@ -1,4 +1,4 @@
-package co.za.ars.model;
+package co.za.bbd.ars.model;
 
 import java.util.Objects;
 

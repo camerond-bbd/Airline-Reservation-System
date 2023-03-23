@@ -1,8 +1,9 @@
-package co.za.ars.service;
-import co.za.ars.model.Airport;
+package co.za.bbd.ars.service;
+import co.za.bbd.ars.model.Airport;
+
 import java.util.List;
 import java.util.Optional;
-public interface AirportService {
+public interface AirportService extends IService {
 	
     List<Airport> getAllAirports();
     
@@ -12,5 +13,5 @@ public interface AirportService {
     
     void deleteAirportById(int id);
     
-    void updateAirportById(Airport airport, int id);
+    Airport updateAirportById(int id, Airport airport);
 }

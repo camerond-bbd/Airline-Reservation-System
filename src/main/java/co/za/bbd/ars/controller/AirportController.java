@@ -1,4 +1,4 @@
-package co.za.ars.controller;
+package co.za.bbd.ars.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import jakarta.validation.Valid;
-
+import co.za.bbd.ars.service.AirportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import co.za.ars.model.Airport;
-import co.za.ars.repository.AirportRepository;
-import co.za.ars.service.AirportService;
+import co.za.bbd.ars.model.Airport;
+import co.za.bbd.ars.repository.AirportRepository;
+import co.za.bbd.ars.service.AirportService;
 
 @RestController
 @RequestMapping("/airports")
@@ -68,13 +67,13 @@ public class AirportController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateAirport(@Valid @RequestBody Airport airport,@PathVariable int id) throws Exception{
-		Airport updatedAirport = airportService.updateAirport(id, airport);
+		Airport updatedAirport = airportService.updateAirportById(id, airport);
 		return ResponseEntity.noContent().build();
 		
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object>  deleteAirport(@PathVariable int id) {
+	public ResponseEntity<Object>  deleteAirport(@PathVariable int id) throws ClassNotFoundException {
 		Optional<Airport> airport = airportService.getAirportById(id);
 		if(!airport.isPresent()) 
 			throw new NoSuchElementException(" Airport with id="+ id + " not found.");
