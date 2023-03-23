@@ -29,7 +29,7 @@ import co.za.bbd.ars.repository.AirportRepository;
 import co.za.bbd.ars.service.AirportService;
 
 @RestController
-@RequestMapping("api/v1/airline-system/airport)
+@RequestMapping("api/v1/airline-system/airport")
 public class AirportController {
 	
 	@Autowired
