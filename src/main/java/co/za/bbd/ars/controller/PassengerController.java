@@ -1,11 +1,15 @@
 package co.za.bbd.ars.controller;
 
+import co.za.bbd.ars.dtos.PassengerFilters;
 import co.za.bbd.ars.model.Passenger;
 import co.za.bbd.ars.service.impl.PassengerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/airline-system/passenger")
@@ -17,15 +21,16 @@ public class PassengerController {
         this.passengerService = passengerService;
     }
 
-    /*@RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<PassengerDataResponse> createNewPassenger(@RequestBody PassengerData passengerData)
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Passenger> createNewPassenger(@RequestBody Passenger passengerData)
     {
-        PassengerDataResponse newPassenger = passengerService.createNewPassenger(passengerData);
+        Passenger newPassenger = passengerService.createNewPassenger(passengerData);
         return new ResponseEntity<>(newPassenger, HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<List<PassengerDataResponse>> getAllPassengers(
+    public ResponseEntity<List<Passenger>> getAllPassengers(
+            @RequestParam(value = "passengerId") Integer passengerId,
             @RequestParam(value = "firstName") String firstName,
             @RequestParam(value = "lastName") String lastName,
             @RequestParam(value = "email") String email,
@@ -34,9 +39,9 @@ public class PassengerController {
             @RequestParam(value = "nationality") String nationality)
     {
         PassengerFilters filters = new PassengerFilters(passengerId, firstName, lastName, email, phoneNumber, dateOfBirth, nationality);
-        List<PassengerDataResponse> passengerDataResponses = passengerService.getPassengers(filters);
+        List<Passenger> passengerDataResponses = passengerService.getPassengers(filters);
         return new ResponseEntity<>(passengerDataResponses, HttpStatus.CREATED);
-    }*/
+    }
 
     @RequestMapping(value = "/{passenger}/update", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity updatePassenger(

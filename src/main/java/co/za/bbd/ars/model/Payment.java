@@ -16,15 +16,17 @@ public class Payment {
     @NotNull
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private int paymentId;
+    private Integer paymentId;
 
     @NotNull
-    private int reservationId;
+    private Integer reservationId;
 
-    @OneToOne
-    @JoinColumn(name = "FK_paymentMethodId", referencedColumnName = "paymentMethodId")
+    //    @OneToOne
+//    @JoinColumn(name = "FK_paymentMethodId", referencedColumnName = "paymentMethodId")
+//    @OneToOne
+//    @JoinColumn(name = "paymentMethodId")
     @NotNull
-    private int paymentMethodId;
+    private Integer paymentMethodId;
     @NotNull
     private double amountPaid;
     @NotNull
