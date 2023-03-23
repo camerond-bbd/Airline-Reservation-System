@@ -22,7 +22,7 @@ import co.za.ars.service.ReservationService;
 
 
 @RestController
-@RequestMapping("/reservations")
+@RequestMapping("api/v1/airline-system/ticket")
 public class ReservationController {
 	
 	@Autowired
