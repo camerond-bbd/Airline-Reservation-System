@@ -29,4 +29,13 @@ public class AirlineController {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<Airline> createNewAirline(
+            @RequestBody Airline airline
+    ){
+        Airline newAirline = airlineService.save(airline);
+
+        return new ResponseEntity<>(newAirline, HttpStatus.CREATED);
+    }
 }
