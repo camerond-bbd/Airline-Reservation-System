@@ -37,11 +37,10 @@ public class FlightController {
     public ResponseEntity<List<FlightDataResponse>> getAllFlights(
             @RequestParam(value = "airlineId", required = false) Integer airlineId,
             @RequestParam(value = "departureAirportId", required = false) Integer departureAirportId,
-            @RequestParam(value = "arrivalAirportId", required = false) Integer arrivalAirportId,
-            @RequestParam(value = "minPrice", required = false) Double minPrice,
-            @RequestParam(value = "maxPrice", required = false) Double maxPrice)
+            @RequestParam(value = "arrivalAirportId", required = false) Integer arrivalAirportId
+    )
     {
-        FlightFilters filters= new FlightFilters(airlineId, departureAirportId, arrivalAirportId, minPrice, maxPrice);
+        FlightFilters filters= new FlightFilters(airlineId, departureAirportId, arrivalAirportId);
         List<FlightDataResponse> flightDataResponses = flightService.getFlights(filters);
         return new ResponseEntity<>(flightDataResponses, HttpStatus.CREATED);
     }

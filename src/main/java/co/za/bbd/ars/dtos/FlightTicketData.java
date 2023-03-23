@@ -9,6 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 public class FlightTicketData {
 
+    private String status;
     private String ticketDescription;
     private double price;
     private List<Integer> seats;

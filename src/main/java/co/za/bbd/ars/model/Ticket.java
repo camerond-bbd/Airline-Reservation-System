@@ -13,6 +13,7 @@ import java.util.Objects;
 public class Ticket {
     @NotNull
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ticketId;
     @NotNull
     private int flightId;
