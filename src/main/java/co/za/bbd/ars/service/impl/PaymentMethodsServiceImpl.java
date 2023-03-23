@@ -42,7 +42,4 @@ public class PaymentMethodsServiceImpl implements PaymentMethodsService {
     public void delete(PaymentMethods paymentMethods) {
 
     }
-    public PaymentMethods save(PaymentMethods paymentMethods) {
-        return this.repository.save(paymentMethods);
-    }
 }
