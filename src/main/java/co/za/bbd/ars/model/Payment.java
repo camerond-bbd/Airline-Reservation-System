@@ -21,8 +21,8 @@ public class Payment {
     @NotNull
     private int reservationId;
 
-    //@OneToOne
-    //@JoinColumn(name = "FK_paymentMethodId", referencedColumnName = "paymentMethodId")
+    @OneToOne
+    @JoinColumn(name = "FK_paymentMethodId", referencedColumnName = "paymentMethodId")
     @NotNull
     private int paymentMethodId;
     @NotNull

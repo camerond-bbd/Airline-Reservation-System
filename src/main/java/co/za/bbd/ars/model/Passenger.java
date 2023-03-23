@@ -15,8 +15,8 @@ public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "passengerId", nullable = false)
-    //@OneToMany
-    //@JoinColumn(name = "FK_passengerId", referencedColumnName = "passengerId")
+    @OneToMany
+    @JoinColumn(name = "FK_passengerId", referencedColumnName = "passengerId")
     private Integer passengerId;
 
     @Column(name = "firstName", nullable = false)
