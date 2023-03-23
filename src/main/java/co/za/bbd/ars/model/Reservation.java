@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Reservation {
-
+        @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "reservationId", nullable = false)
 	private int reservationId;
