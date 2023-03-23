@@ -1,8 +1,6 @@
 package co.za.bbd.ars.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +17,12 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private int paymentId;
+
     @NotNull
     private int reservationId;
+
+    //@OneToOne
+    //@JoinColumn(name = "FK_paymentMethodId", referencedColumnName = "paymentMethodId")
     @NotNull
     private int paymentMethodId;
     @NotNull

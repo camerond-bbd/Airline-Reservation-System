@@ -3,8 +3,6 @@ package co.za.bbd.ars.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Date;
 import java.util.Objects;
@@ -17,6 +15,8 @@ public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "passengerId", nullable = false)
+    //@OneToMany
+    //@JoinColumn(name = "FK_passengerId", referencedColumnName = "passengerId")
     private Integer passengerId;
 
     @Column(name = "firstName", nullable = false)
