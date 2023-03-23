@@ -30,44 +30,34 @@ public class ReservationController {
 	
 	@PostMapping()
 	public ResponseEntity<Reservation> saveReservation(@RequestBody Reservation reservation){
-		
 		Reservation saveReservation = reservationService.createReservation(reservation);
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(saveReservation);
-		
+	      return ResponseEntity.status(HttpStatus.CREATED).body(saveReservation);
 	}
 	
 	@GetMapping()
 	public ResponseEntity<List<Reservation>> getAllReservations(){
-		
 		List<Reservation> reservations  = reservationService.getAllReservations();
-		
-		return ResponseEntity.status(HttpStatus.OK).body(reservations);
-		
+	      return ResponseEntity.status(HttpStatus.OK).body(reservations);
 	}
 	
 	@PostMapping("/{id}")
 	public ResponseEntity<Reservation> getReservationById(@PathVariable int id){
-		
 		Reservation reservation = reservationService.getReservationById(id).get();
-		
-		return ResponseEntity.status(HttpStatus.OK).body(reservation);
+	      return ResponseEntity.status(HttpStatus.OK).body(reservation);
 		
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Reservation> updateReservationById(@RequestBody Reservation reservation,@PathVariable int id){
 		reservationService.updateReservation(reservation, id);
-		return ResponseEntity.status(HttpStatus.OK).body(reservation);
-		
+	      return ResponseEntity.status(HttpStatus.OK).body(reservation);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Reservation> deleteReservationById(@PathVariable int id){
 		Reservation reservation = reservationService.getReservationById(id).get();
 		reservationService.deleteReservation(id);
-		
-		return ResponseEntity.status(HttpStatus.OK).body(reservation);
+	      return ResponseEntity.status(HttpStatus.OK).body(reservation);
 		
 	}
 
