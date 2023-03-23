@@ -21,7 +21,7 @@ import co.za.bbd.ars.service.ReservationService;
 
 
 @RestController
-@RequestMapping("api/v1/airline-system/ticket")
+@RequestMapping("api/v1/airline-system/reservation")
 public class ReservationController {
 	
 	@Autowired
