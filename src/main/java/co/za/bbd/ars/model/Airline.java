@@ -7,7 +7,6 @@ import java.util.Objects;
 
 @Entity
 @Data
-@AllArgsConstructor
 
 public class Airline {
     @Id
@@ -17,6 +16,14 @@ public class Airline {
 
     @Column(name = "airlineName", nullable = false)
     private String airlineName;
+
+    public Airline() {
+    }
+
+    public Airline(Integer airlineId, String airlineName) {
+        this.airlineId = airlineId;
+        this.airlineName = airlineName;
+    }
 
     @Override
     public boolean equals(Object o) {

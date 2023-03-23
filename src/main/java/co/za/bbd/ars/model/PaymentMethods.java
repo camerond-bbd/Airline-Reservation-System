@@ -7,7 +7,6 @@ import java.util.Objects;
 
 @Entity
 @Data
-@AllArgsConstructor
 
 public class PaymentMethods {
 
@@ -19,6 +18,13 @@ public class PaymentMethods {
     @Column(name = "paymentMethod", nullable = false)
     private String paymentMethod;
 
+    public PaymentMethods() {
+    }
+
+    public PaymentMethods(Integer paymentMethodId, String paymentMethod) {
+        this.paymentMethodId = paymentMethodId;
+        this.paymentMethod = paymentMethod;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
