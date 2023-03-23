@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface PaymentMethodsRepository extends JpaRepository<PaymentMethods, Integer> {
-    List<PaymentMethods> findAllByPaymentMethodName(String paymentMethodName);
+    List<PaymentMethods> findAllByPaymentMethod(String paymentMethodName);
 }

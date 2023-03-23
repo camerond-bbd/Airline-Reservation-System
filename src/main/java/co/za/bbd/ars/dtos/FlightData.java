@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class FlightData {
-    private Integer arlineId;
+    private Integer airlineId;
     private Integer departureAirportId;
     private Integer arrivalAirportId;
     private Date departureDate;
@@ -21,7 +21,7 @@ public class FlightData {
     public Flight getFlightObject() {
         return new Flight(
                 0,
-                this.arlineId,
+                this.airlineId,
                 this.departureAirportId,
                 this.arrivalAirportId,
                 this.departureDate,

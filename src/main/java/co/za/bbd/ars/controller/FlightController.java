@@ -28,17 +28,18 @@ public class FlightController {
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<FlightDataResponse> createNewFlightPlan(@RequestBody FlightData flightData)
     {
+        System.out.println(flightData);
         FlightDataResponse newFlightPlan = flightService.createNewFlightPlan(flightData);
         return new ResponseEntity<>(newFlightPlan, HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<FlightDataResponse>> getAllFlights(
-            @RequestParam(value = "airlineId") Integer airlineId,
-            @RequestParam(value = "departureAirportId") Integer departureAirportId,
-            @RequestParam(value = "arrivalAirportId") Integer arrivalAirportId,
-            @RequestParam(value = "minPrice") Double minPrice,
-            @RequestParam(value = "maxPrice") Double maxPrice)
+            @RequestParam(value = "airlineId", required = false) Integer airlineId,
+            @RequestParam(value = "departureAirportId", required = false) Integer departureAirportId,
+            @RequestParam(value = "arrivalAirportId", required = false) Integer arrivalAirportId,
+            @RequestParam(value = "minPrice", required = false) Double minPrice,
+            @RequestParam(value = "maxPrice", required = false) Double maxPrice)
     {
         FlightFilters filters= new FlightFilters(airlineId, departureAirportId, arrivalAirportId, minPrice, maxPrice);
         List<FlightDataResponse> flightDataResponses = flightService.getFlights(filters);
