@@ -15,9 +15,7 @@ public class PassengerServiceImpl implements PassengerService {
     private final PassengerRepository passengerRepository;
 
     @Autowired
-    public PassengerServiceImpl(
-            PassengerRepository passengerRepository
-    ) {
+    public PassengerServiceImpl(PassengerRepository passengerRepository) {
         this.passengerRepository = passengerRepository;
     }
 
