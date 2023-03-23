@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
+
 public class PassengerData {
     private String firstName;
     private String lastName;

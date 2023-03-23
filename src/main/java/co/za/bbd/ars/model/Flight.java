@@ -59,6 +59,6 @@ public class Flight {
                 ", departureDate=" + departureDate +
                 ", arrivalDate=" + arrivalDate +
                 ", availableSeats=" + availableSeats +
-                '}';
+                "}";
     }
 }
