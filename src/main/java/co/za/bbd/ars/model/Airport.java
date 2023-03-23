@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -19,11 +20,11 @@ import lombok.Setter;
 public class Airport {
     
 	@Id
-    @GeneratedValue
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int airportId;
 	
 	@NotNull
-    @Size(min = 4, message = "Name should have at least 4 characters")
+        @Size(min = 4, message = "Name should have at least 4 characters")
 	private String airName;
 	
 	@NotNull
