@@ -3,7 +3,8 @@ package co.za.bbd.ars.service;
 import java.util.List;
 import java.util.Optional;
 
-import co.za.ars.model.Reservation;
+import co.za.bbd.ars.model.Reservation;
+import co.za.bbd.ars.model.Reservation;
 
 public interface ReservationService {
 	

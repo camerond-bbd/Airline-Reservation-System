@@ -1,4 +1,4 @@
-package co.za.ars.controller;
+package co.za.bbd.ars.controller;
 
 
 import java.util.List;
@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.za.ars.model.Reservation;
-import co.za.ars.repository.ReservationRepository;
-import co.za.ars.service.ReservationService;
+import co.za.bbd.ars.model.Reservation;
+import co.za.bbd.ars.service.ReservationService;
 
 
 @RestController

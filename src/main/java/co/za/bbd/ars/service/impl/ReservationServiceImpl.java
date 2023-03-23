@@ -3,13 +3,13 @@ package co.za.bbd.ars.service;
 import java.util.List;
 import java.util.Optional;
 
+import co.za.bbd.ars.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.EntityNotFoundException;
-import co.za.ars.model.Airport;
-import co.za.ars.model.Reservation;
-import co.za.ars.repository.ReservationRepository;
+import co.za.bbd.ars.model.Airport;
+import co.za.bbd.ars.model.Reservation;
+import co.za.bbd.ars.repository.ReservationRepository;
 
 
 @Service
@@ -17,7 +17,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired
 	private ReservationRepository reservationRepository;
-	
+
 	@Override
 	public Reservation createReservation(Reservation reservation) {
 		return reservationRepository.save(reservation);
