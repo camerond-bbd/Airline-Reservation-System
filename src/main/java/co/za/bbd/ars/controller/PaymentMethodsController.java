@@ -8,8 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("api/v1/airline-system/paymentMethod")
 public class PaymentMethodsController {
     private final PaymentMethodsServiceImpl paymentMethodsService;
 
@@ -17,7 +19,7 @@ public class PaymentMethodsController {
     public PaymentMethodsController(PaymentMethodsServiceImpl paymentMethodsService) {
         this.paymentMethodsService = paymentMethodsService;
     }
-    @RequestMapping(value = "/{paymentMethod}/update", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/{paymentMethodId}/update", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity updatePaymentMethod(
             @PathVariable Integer paymentMethodId,
             @RequestBody PaymentMethods paymentMethod
@@ -28,5 +30,13 @@ public class PaymentMethodsController {
         } catch (IllegalArgumentException exception) {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<PaymentMethods> createNewPaymentMethod(
+            @RequestBody PaymentMethods paymentMethods
+    ) {
+        PaymentMethods newMethod = paymentMethodsService.save(paymentMethods);
+        return new ResponseEntity<>(newMethod, HttpStatus.CREATED);
     }
 }
