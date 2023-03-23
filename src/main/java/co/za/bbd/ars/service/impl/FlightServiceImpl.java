@@ -6,6 +6,7 @@ import co.za.bbd.ars.dtos.FlightFilters;
 import co.za.bbd.ars.dtos.FlightTicketData;
 import co.za.bbd.ars.model.Flight;
 import co.za.bbd.ars.model.Ticket;
+import co.za.bbd.ars.model.TicketStatuses;
 import co.za.bbd.ars.repository.FlightRepository;
 import co.za.bbd.ars.service.FlightService;
 import co.za.bbd.ars.service.TicketService;
@@ -22,15 +23,18 @@ import java.util.stream.Collectors;
 public class FlightServiceImpl implements FlightService {
 
     private final FlightRepository flightRepository;
-    private final TicketService ticketService;
+    private final TicketServiceImpl ticketService;
+    private final TicketStatusesImpl ticketStatuses;
 
     @Autowired
     public FlightServiceImpl(
             FlightRepository flightRepository,
-            TicketService ticketService
+            TicketServiceImpl ticketService,
+            TicketStatusesImpl ticketStatuses
     ) {
         this.flightRepository = flightRepository;
         this.ticketService = ticketService;
+        this.ticketStatuses = ticketStatuses;
     }
 
     @Override
@@ -77,15 +81,17 @@ public class FlightServiceImpl implements FlightService {
 
 
     private List<Ticket> createTickets(FlightTicketData flightTicketData, Integer flightId){
-        return flightTicketData.getSeats().stream().map(seatNUmber -> {
+        return flightTicketData.getSeats().stream().map(seatNumber -> {
+            TicketStatuses status = ticketStatuses.findStatusByStatusName(flightTicketData.getStatus());
             Ticket newTicket = new Ticket(
                     0,
                     flightId,
-                    0,
+                    status.getStatusId(),
                     flightTicketData.getTicketDescription(),
                     flightTicketData.getPrice(),
-                    seatNUmber
+                    seatNumber
             );
+            System.out.println(newTicket);
             return ticketService.save(newTicket);
         }).collect(Collectors.toList());
     }
@@ -95,7 +101,7 @@ public class FlightServiceImpl implements FlightService {
 
         return this.getFlightsByFilters(filters).stream()
                 .map(filteredFlight -> {
-                    List<Ticket> tickets = this.getTicketsByFilters(filteredFlight.getFlightId(), filters);
+                    List<Ticket> tickets = ticketService.findAllByFlightId(filteredFlight.getFlightId());
                     return new FlightDataResponse(filteredFlight, tickets);
                 })
                 .collect(Collectors.toList());
@@ -119,18 +125,6 @@ public class FlightServiceImpl implements FlightService {
             return flightRepository.findAllByAirlineIdAndDepartureAirportId(filters.getAirlineId(), filters.getDepartureAirportId());
         }
         return this.findAll();
-    }
-
-    @Override
-    public List<Ticket> getTicketsByFilters(Integer flightId, FlightFilters filters){
-//        if(filters.getMinPrice() != null && filters.getMaxPrice() != null){
-//            return ticketService.findAllByFlightIdAndPriceLessThenEqualAndPriceGreaterThenEqual(flightId, filters.getMaxPrice(), filters.getMinPrice());
-//        } else if (filters.getMinPrice() == null && filters.getMaxPrice() != null) {
-//            return ticketService.findAllByFlightIdAndPriceLessThenEqual(flightId, filters.getMaxPrice());
-//        } else if (filters.getMinPrice() != null) {
-//            return  ticketService.findAllByFlightIdAndPriceGreaterThenEqual(flightId, filters.getMinPrice());
-//        }
-        return ticketService.findAllByFlightId(flightId);
     }
 
     @Override

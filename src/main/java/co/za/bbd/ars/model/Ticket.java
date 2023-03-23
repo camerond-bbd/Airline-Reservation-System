@@ -19,7 +19,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class Ticket {
     @NotNull
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ticketId;
 //    @ManyToOne
 //    @JoinColumn(name = "FK_flightId", referencedColumnName = "flightId")

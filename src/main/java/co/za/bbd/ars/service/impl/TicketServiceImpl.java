@@ -47,21 +47,4 @@ public class TicketServiceImpl implements TicketService {
     public List<Ticket> findAllByFlightId(Integer id) {
         return repository.findAllByFlightId(id);
     }
-
-//    @Override
-//    public List<Ticket> findAllByFlightIdAndPriceGreaterThenEqual(Integer flightId, double minPrice) {
-//        return repository.findAllByFlightIdAndPriceGreaterThenEqual(flightId, minPrice);
-//    }
-//
-//    @Override
-//    public List<Ticket> findAllByFlightIdAndPriceLessThenEqual(Integer flightId, double maxPrice) {
-//        return repository.findAllByFlightIdAndPriceLessThenEqual(flightId, maxPrice);
-//    }
-//
-//    @Override
-//    public List<Ticket> findAllByFlightIdAndPriceLessThenEqualAndPriceGreaterThenEqual(Integer flightId, double maxPrice, double minPrice) {
-//        return repository.findAllByFlightIdAndPriceLessThenEqualAndPriceGreaterThenEqual(flightId, maxPrice, minPrice);
-//    }
-
-
 }

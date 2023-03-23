@@ -11,6 +11,4 @@ public class FlightFilters {
     private Integer airlineId;
     private Integer departureAirportId;
     private Integer arrivalAirportId;
-    private Double minPrice;
-    private Double maxPrice;
 }

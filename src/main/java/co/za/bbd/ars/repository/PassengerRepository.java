@@ -11,5 +11,7 @@ import java.util.List;
 public interface PassengerRepository extends JpaRepository<Passenger, Integer> {
     List<Passenger> findAllByPassengerId(Integer Id);
     List<Passenger> findAllByFirstNameAndLastName(String firstName, String lastName);
+    List<Passenger> findAllByFirstName(String firstName);
+    List<Passenger> findAllByLastName(String lastName);
     List<Passenger> findAllByDateOfBirth(Date dateOfBirth);
 }
