@@ -34,7 +34,10 @@ public class Airport {
 	@NotNull
 	@Size(min = 4, message = "Country should have at least 4 characters")
 	private String country;
-	
+
+	public Airport() {
+	}
+
 	public Airport(int airportId, String airName, String city, String country) {
 		super();
 		this.airportId = airportId;

@@ -30,13 +30,13 @@ public class PassengerController {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Passenger>> getAllPassengers(
-            @RequestParam(value = "passengerId") Integer passengerId,
-            @RequestParam(value = "firstName") String firstName,
-            @RequestParam(value = "lastName") String lastName,
-            @RequestParam(value = "email") String email,
-            @RequestParam(value = "phoneNumber") String phoneNumber,
-            @RequestParam(value = "dateOfBirth") Date dateOfBirth,
-            @RequestParam(value = "nationality") String nationality)
+            @RequestParam(value = "passengerId", required = false) Integer passengerId,
+            @RequestParam(value = "firstName", required = false) String firstName,
+            @RequestParam(value = "lastName", required = false) String lastName,
+            @RequestParam(value = "email", required = false) String email,
+            @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
+            @RequestParam(value = "dateOfBirth", required = false) Date dateOfBirth,
+            @RequestParam(value = "nationality", required = false) String nationality)
     {
         PassengerFilters filters = new PassengerFilters(passengerId, firstName, lastName, email, phoneNumber, dateOfBirth, nationality);
         List<Passenger> passengerDataResponses = passengerService.getPassengers(filters);

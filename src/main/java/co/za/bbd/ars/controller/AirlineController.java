@@ -17,7 +17,7 @@ public class AirlineController {
         this.airlineService = airlineService;
     }
 
-    @RequestMapping(value = "/{airline}/update", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/{airlineId}/update", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity updateAirline(
             @PathVariable Integer airlineId,
             @RequestBody Airline airline
