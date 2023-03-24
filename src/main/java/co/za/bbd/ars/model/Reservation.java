@@ -6,14 +6,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
@@ -22,9 +15,7 @@ import lombok.Setter;
 @Entity
 @Data
 @Getter
-@Set
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
 
 public class Reservation implements Serializable {
 	
@@ -53,7 +44,18 @@ public class Reservation implements Serializable {
 	@NotNull
 	@Column(name = "reservationDate", nullable = false)
 	private Date reservationDate;
-	
+
+	public Reservation() {
+	}
+
+	public Reservation(int reservationId, Flight flight, Ticket ticket, Passenger passenger, Date reservationDate) {
+		this.reservationId = reservationId;
+		this.flight = flight;
+		this.ticket = ticket;
+		this.passenger = passenger;
+		this.reservationDate = reservationDate;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(flight, passenger, reservationDate, reservationId, ticket);
