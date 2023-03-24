@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
@@ -39,7 +40,7 @@ public class Reservation implements Serializable {
 	@Autowired
 	private Flight flight;
 	
-	@ManyToOne
+	@OneToOne
         @JoinColumn(name="ticketId")
 	@Autowired
 	private Ticket ticket;
