@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,8 +21,14 @@ import lombok.Setter;
 @Entity
 @Data
 @Getter
-@Setter
-public class Reservation {
+@Set
+@AllArgsConstructor
+@NoArgsConstructor
+
+public class Reservation implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
         @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "reservationId", nullable = false)
@@ -46,23 +53,6 @@ public class Reservation {
 	@Column(name = "reservationDate", nullable = false)
 	private Date reservationDate;
 	
-	
-	public Reservation() {
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public Reservation(int reservationId, Flight flight, Ticket ticket, Passenger passenger,
-			@NotNull Date reservationDate) {
-		super();
-		this.reservationId = reservationId;
-		this.flight = flight;
-		this.ticket = ticket;
-		this.passenger = passenger;
-		this.reservationDate = reservationDate;
-	}
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(flight, passenger, reservationDate, reservationId, ticket);
